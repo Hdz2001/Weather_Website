@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html>
+
+<head> 
+    <meta name = "viewport" content = "width=device-width, initial-scale = 1.0" >
+    <!--width=device-width part sets the width of the page to follow the screen-width of the device (which will vary depending on the device).--> 
+    <!--initial-scale=1.0 part sets the initial zoom level when the page is first loaded by the browser..-->
+
+    <title>For my bae, ilysm.</title>
+    <link rel = "icon" href = "images/clear.png">
+
+    <link rel = "stylesheet" href = "style.css">
+</head>
+
+<body>
+
+    <div class = "card">
+
+        <div class = "search">
+            <input type = "text" placeholder="Enter city name, then press Enter or search icon." spellcheck="false"> 
+            <!--spellcheck false: the element is not to be checked.-->
+            
+            <button><img src = "images/search.png"></button>
+        </div>
+
+        <div class = "error">
+            <p>Invalid city name.</p>
+        </div>
+
+        
+        <div class = "timeDate">
+            <p>Current date and time: </p>
+        </div>
+
+
+        <div class = "main">
+            
+            <div class = "weather">
+
+                <h1 class="city">Ha Noi</h1>
+
+                <img src = "images/rain.png" class = "weather-icon">
+    
+                <h2 class="temp">22°C</h2>
+    
+                <h2 class="feelLike">Feel like 22°C</h2>
+    
+                
+            </div>
+    
+            <div class = info>
+                <h1>7 days forecast</h1>
+            </div>
+        </div>
+
+        
+        <div class="details">
+            <div class = "col">
+                <img src="images/min_temp.png">
+                <div>
+                    <p class="minTemp">15 km/h</p>
+                    <p>Min. Temp</p>
+                </div>
+            </div>
+
+            <div class = "col">
+                <img src="images/max_temp.png">
+                <div>
+                    <p class="maxTemp">15 km/h</p>
+                    <p>Max. Temp</p>
+                </div>
+            </div>
+
+            <div class = "col">
+                <img src="images/humidity.png">
+                <div>
+                    <p class="humidity">50%</p>
+                    <p>Humidity</p>
+                </div>
+            </div>
+
+            <div class = "col">
+                <img src="images/wind.png">
+                <div>
+                    <p class="wind">15 km/h</p>
+                    <p>Wind Speed</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src = "currentIp.js"></script>
+
+    <script src = "time.js" ></script>
+
+    <script src = "script.js" ></script>
+
+    
+</body>
+
+</html>

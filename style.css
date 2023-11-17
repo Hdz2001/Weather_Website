@@ -1,0 +1,143 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins';
+    box-sizing: border-box;
+}
+
+body{
+    background: url("images/night_time.gif");
+    background-size: cover;
+}
+
+.card{
+    width: 90%;
+    max-width: 1000px;
+    color: #fff;
+    margin: 50px auto;
+    border-radius: 20px;
+    padding: 40px 35px;
+    text-align: center;
+}
+
+.search{ 
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search input{ 
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    color: #555;
+    padding: 10px 25px;
+    height: 60px;
+    border-radius: 30px;
+    flex: 1;
+    margin-right: 16px;
+    font-size: 20px;
+}
+
+.search button{
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.search button img{
+    width: 25px;
+}
+
+.timeDate{
+    font-size: 30px;
+    font-style: bold;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 35px;
+    display: none;
+}
+
+/*WEATHER + INFO*/
+.main {
+    display: none;
+}
+
+/*WEATHER*/
+.weather{
+    width: 50%;
+    float: left;
+    color: #fff;
+    border-radius: 50px;
+    padding: 40px 35px;
+    text-align: center;
+    display: none;
+}
+
+.weather-icon{
+    width: 200px;
+    text-align: right;
+}
+
+.weather h1{
+    font-size: 70px;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+.weather h2{
+    font-size: 45px;
+    font-weight: 400;
+    margin-top: -10px;
+}
+
+/*INFO - 7 DAYS PREDICTION*/
+.info {
+    font-size: 20px;
+    width: 50%;
+    float: right;
+    color: #fff;
+    border-radius: 50px;
+    padding: 0px 30px;
+    text-align: left;
+}
+
+/*DETAILS ABOUT WEATHER*/
+.details{
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px 10px 0px;
+    margin-top: 50px;
+}
+
+.col{
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.col img{
+    width: 50px;
+    margin-right: 10px;
+}
+
+.humidity, .wind, .maxTemp, .minTemp{
+    font-size: 28px;
+    margin-top: -6px;
+    font-weight: bold
+}
+
+/*ERROR MSG*/
+.error{
+    text-align: left;
+    margin-left: 10px;
+    font-size: 20px;
+    margin-top: 10px;
+    display: none;
+}
