@@ -83,7 +83,7 @@ async function checkWeather(city){
         document.querySelector(".temp").innerHTML = data.main.temp + "°C";
         document.querySelector(".feelLike").innerHTML = "Feels like " + data.main.feels_like + "°C";
         document.querySelector(".humidity").innerHTML = data.main.humidity +"%";
-        document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+        document.querySelector(".wind").innerHTML = Math.round(data.wind.speed * 3.6 * 100) / 100 + " km/h";
         document.querySelector(".minTemp").innerHTML = data.main.temp_min + "°C";
         document.querySelector(".maxTemp").innerHTML = data.main.temp_max + "°C";
 
