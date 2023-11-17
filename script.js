@@ -2,6 +2,16 @@
 //    checkTime 
 //} from './time.js';
 
+const apiKey = "77e88b916f4da4cfcd02ba787ae4e0cf";
+// URL for currentWeather
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+// URL for forecast
+const fcUrl = "https://api.openweathermap.org/data/2.5/forecast?units=metric&"
+
+const searchBox = document.querySelector(".search input");
+const searchBtn = document.querySelector(".search button");
+const weatherIcon = document.querySelector(".weather-icon");
+
 async function checkTime(lat, lng)
 {
     // using timezonedb api to get the data, only 1 request per second
@@ -10,6 +20,7 @@ async function checkTime(lat, lng)
 
     var data = await response.json();
 
+    console.log("CHECK TIME");
     console.log(data);
 
     let dateTime =  data.formatted;
@@ -34,16 +45,28 @@ async function checkTime(lat, lng)
         // can be cleaner? 
         document.querySelector(".weather").style.background = "url('images/day_time.gif')";
         document.querySelector(".weather").style.backgroundSize = "cover";
+
+        var elems = document.querySelectorAll(".dayBox");
+        var index = 0, length = elems.length;
+        for ( ; index < length; index++) {
+            elems[index].style.background = "linear-gradient(200deg, #8ac95d, #ffd1dc)";
+        }
     } 
     else{
         // else it's night time 
         document.body.style.setProperty('background', "url('images/night_time.gif')");
         document.body.style.setProperty('background-size', "cover");
 
-        document.querySelector(".card").style.background = "linear-gradient(135deg, #1100fe, #5b548a)";
+        document.querySelector(".card").style.background = "linear-gradient(200deg, #5b548a,#0044fe)";
 
         document.querySelector(".weather").style.background = "url('images/night_time.gif')";
         document.querySelector(".weather").style.backgroundSize = "cover";
+
+        var elems = document.querySelectorAll(".dayBox");
+        var index = 0, length = elems.length;
+        for ( ; index < length; index++) {
+            elems[index].style.background = "linear-gradient(0deg, #808080, #a9a9a9)";
+        }
     }
 
     // change timeDate value in html accordinngly
@@ -53,12 +76,63 @@ async function checkTime(lat, lng)
 
 // export {checkTime};
 
-const apiKey = "77e88b916f4da4cfcd02ba787ae4e0cf";
-const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+async function forecastWeather(lat, lng){
+    // 5 days/3hrs forecast
+    const response = await fetch(fcUrl + `&lat=${lat}` + `&lon=${lng}` + `&appid=${apiKey}`);
+    var data = await response.json();
+    console.log("FORECAST");
+    console.log(data);
 
-const searchBox = document.querySelector(".search input");
-const searchBtn = document.querySelector(".search button");
-const weatherIcon = document.querySelector(".weather-icon");
+    // make an array to store forecast values
+    // this array always has length of 40
+    let fcArray = data.list;
+    console.log(fcArray);
+
+    // new day start at array 5 
+    // end day from 5->12
+
+    // arrays to store time, degree, weather values
+    let time = [];
+    let degree = [];
+    let weather = [];
+
+    for (let i = 0; i < 40; i++) {
+        time.push(fcArray[i].dt_txt);
+        degree.push(fcArray[i].main.temp);
+        weather.push(fcArray[i].weather[0].main);
+    }
+
+    console.log(time);
+    console.log(degree);
+    console.log(weather);
+
+    for (let i = 1; i <= 40; i++) {
+        let splitTime = time[i-1].split(" ");
+        let splitDay = splitTime[0].split("-");
+
+        document.querySelector(".time" +i).innerHTML = splitDay[2] + "/" + splitDay[1] + "\n" + splitTime[1].slice(0, -3);
+        document.querySelector(".degree" +i).innerHTML = degree[i-1] + "°C";
+
+        if (weather[i-1] == "Clouds"){
+            document.querySelector(".weather" +i).src = "images/clouds.png";
+        }
+        else if (weather[i-1] == "Clear"){
+            document.querySelector(".weather" +i).src = "images/clear.png";
+        }
+        else if (weather[i-1] == "Rain"){
+            document.querySelector(".weather" +i).src = "images/rain.png";
+        }
+        else if (weather[i-1] == "Drizzle"){
+            document.querySelector(".weather" +i).src = "images/drizzle.png";
+        }
+        else if (weather[i-1] == "Mist"){
+            document.querySelector(".weather" +i).src = "images/mist.png";
+        }
+        else if (weather[i-1] == "Snow"){
+            document.querySelector(".weather" +i).src = "images/snow.png";
+        }
+    }
+}
 
 async function checkWeather(city){
     const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
@@ -80,7 +154,8 @@ async function checkWeather(city){
 
         // change values for card
         document.querySelector(".city").innerHTML = data.name;
-        document.querySelector(".temp").innerHTML = data.main.temp + "°C";
+        document.querySelector(".howWeather").innerHTML = data.weather[0].main;
+        document.querySelector(".temp").innerHTML = data.main.temp + "°C";  
         document.querySelector(".feelLike").innerHTML = "Feels like " + data.main.feels_like + "°C";
         document.querySelector(".humidity").innerHTML = data.main.humidity +"%";
         document.querySelector(".wind").innerHTML = Math.round(data.wind.speed * 3.6 * 100) / 100 + " km/h";
@@ -114,6 +189,7 @@ async function checkWeather(city){
 
         // check current time 
         checkTime(lat,lng);
+        forecastWeather(lat,lng);
     }            
 }  
         
