@@ -10,6 +10,7 @@ const fcUrl = "https://api.openweathermap.org/data/2.5/forecast?units=metric&"
 
 const searchBox = document.querySelector(".search input");
 const searchBtn = document.querySelector(".search button");
+const searchValue = document.querySelector(".result-box");
 const weatherIcon = document.querySelector(".weather-icon");
 
 async function checkTime(lat, lng)
@@ -70,7 +71,7 @@ async function checkTime(lat, lng)
     }
 
     // change timeDate value in html accordinngly
-    document.querySelector(".timeDate").innerHTML = "Current date and time: " + data.formatted;   
+    document.querySelector(".timeDate").innerHTML = "Current date and time 🕰️: " + data.formatted;   
     document.querySelector(".timeDate").style.display = "block";
 }
 
@@ -192,15 +193,23 @@ async function checkWeather(city){
         forecastWeather(lat,lng);
     }            
 }  
-        
+
+// on-click function for search btn
 searchBtn.addEventListener("click", ()=> {
     checkWeather(searchBox.value);
+    searchBox.value = '';
 })
 
+// on-click function for search box's value
+searchValue.addEventListener("click", ()=> {
+    checkWeather(searchBox.value);
+    searchBox.value = '';
+})
+
+// on-click function for enter btn of search box 
 searchBox.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         checkWeather(searchBox.value);
+        searchBox.value = '';
     }
 });
-
-//export {checkWeather};

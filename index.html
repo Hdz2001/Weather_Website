@@ -14,19 +14,18 @@
     <link rel = "stylesheet" href = "style.css">
 </head>
 
-<body>
-    
+<body>  
     <div class = "card">
-
-        <div class = "search">
-            <input type = "text" placeholder="Enter city name, then press Enter or search icon." spellcheck="false"> 
+        <div class = "search">                
+            <input type = "text" id = "input-box" placeholder="Enter city name, then press Enter or search icon 👉" spellcheck="false"> 
             <!--spellcheck false: the element is not to be checked.-->
-            
-            <button><img src = "images/search.png"></button>
+            <button><img src = "images/search.png"></button>             
         </div>
 
+        <div class="result-box"></div>
+
         <div class = "error">
-            <p>Invalid city name.</p>
+            <p>Invalid country/city name or not existed in our data 😢</p>
         </div>
 
         
@@ -433,13 +432,16 @@
 
     </div>
 
+    <!--Include the Papa Parse Library to fetch data from csv file-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
     <script src = "currentIp.js"></script>
+
+    <script src = "searchBox.js"></script> 
 
     <script src = "time.js" ></script>
 
     <script src = "script.js" ></script>
-
-    
 </body>
 
 </html>
